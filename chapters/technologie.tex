@@ -1,0 +1,149 @@
+\chapter{Wykorzystane technologie i narzędzia}
+
+% Firebase
+\section{Platforma Firebase}
+Platforma Firebase to zestaw narzędzi stworzony przez Google, który nie tylko umożliwia sprawne budowanie aplikacji, ale również ich monitorowanie i przyciąganie zainteresowania użytkowników. Składa się ona z obszernego zestawu współpracujących ze sobą usług, który trudno wykorzystać w pełni w jednym projekcie. W dalszej części zostały opisane te, które dla realizacji rozważanego tematu miały największe znaczenie. Więcej informacji na ich temat znajduje się w dokumentacji \cite{firebase-docs}.
+
+Z platformy Firebase można korzystać w ramach dwóch planów: Spark oraz Blaze. Pierwszy jest darmowy i udostępnia bezpłatne, odnawiane co miesiąc limity. Jest wystarczający dla części aplikacji, jednak nie wszystkie funkcjonalności są w jego ramach dostępne. Wymusza to na wielu projektach przejście do planu drugiego. Zapewnia on te same darmowe limity, lecz po ich przekroczeniu automatycznie naliczane są koszty. Z uwagi na potrzebę wykorzystania usługi Firebase Functions, dostępnej jedynie w tym planie, musiał on zostać użyty.
+
+\subsection{Firebase Authentication}
+\label{technologie-authentication}
+Firebase Authentication jest częścią platformy Firebase zapewniającą identyfikację i uwierzytelnianie użytkowników. 
+Rozwiązanie to wspiera wiele metod logowania, zaczynając od klasycznego logowania za pomocą emaila i hasła, a kończąc na logowaniu społecznościowym. Istnieje możliwość wykorzystania numeru telefonu, portalu Google, Facebook, Twitter, Yahoo, Microsoft, Apple, Github czy też kont Google Play Games i Game Center. Każdemu zarejestrowanemu użytkownikowi przypisany zostaje unikalny i niezmienny ciąg znakowy zwany UID. Za jego pomocą jest on jednoznacznie identyfikowany. Firebase Authentication posiada również gotowe mechanizmy służące do weryfikacji adresów e-mail oraz numerów telefonu. 
+
+\subsection{Firebase Firestore}
+\label{technologie-firestore}
+
+Firebase Firestore to nierelacyjna baza danych, która umożliwia łatwe przechowywanie danych, ich synchronizację oraz zadawanie zapytań. Została stworzona do bezpośredniej współpracy z aplikacjami klienckimi, które mogą na niej operować. 
+
+Baza posiada wbudowaną funkcjonalność pracy offline, co jest szczególnie przydatne w przypadku urządzeń mobilnych, których połączenie z siecią nie jest stabilne. Gdy połączenia zabraknie, to dane odczytywane są z pamięci cache, a zapisy modyfikują jedynie lokalny obraz bazy, by ulec synchronizacji po przywróceniu połączenia.
+
+Znaczącą zaletę Firestore stanowi wydajność, ponieważ usługa została zaprojektowana pod kątem jak największej skalowalności. Sprowadza się to do tego, że wraz ze zwiększaniem się ilości przechowywanych w niej danych, czas wykonywania zapytań nie rośnie. Jest on proporcjonalny jedynie do rozmiaru zbioru wynikowego.
+
+Widocznym utrudnieniem użytkowania jest ograniczenie co do złożoności możliwych do stworzenia zapytań. Istnieje bowiem wiele reguł mówiących, że pewne operacje nie mogą być ze sobą łączone lub mogą, lecz warunkowo. Przykładem tego jest brak możliwości zawarcia w zapytaniu wielokrotnie operacji nierówności, chyba, że operacje te dotyczą tego samego pola.
+
+Dla prostych zapytań baza Firestore automatycznie tworzy indeksy. Dla bardziej złożonych wymagane jest ich własnoręczne dodanie. W odróżnieniu bowiem od większości systemów bazodanowych, indeksy w Firestore nie przyspieszają zapytań, lecz w ogóle umożliwiają ich wykonanie.
+
+\subsection{Firebase Cloud Storage}
+\label{technologie-storage}
+
+Firebase Cloud Storage to usługa zapewniająca przechowywanie obiektów plikowych. Typowo umieszczanymi w niej danymi są zdjęcia i filmy przesyłane przez użytkowników. Mogą być one porządkowane za pomocą struktury folderów, których zagnieżdżanie jest dozwolone. Każdy obiekt posiada metadane i nie ma przeszkód, by rozszerzyć je o dodatkowe, własne elementy.
+
+Wśród oferowanych funkcjonalności znajduje się możliwość pauzowania oraz wznawiania transferów od momentu w którym zostały przerwane. Okazuje się to bardzo przydatne w przypadku urządzeń mobilnych, dla których przerwanie przesyłu jest często związane ze słabym połączeniem z siecią. Funkcja ta pozwala uniknąć straty czasu oraz zbędnego wykorzystania łącza na ponowne przesłanie tych samych danych. 
+
+\subsection{Firebase Messaging}
+Firebase Messaging to element platformy Firebase zapewniający sprawne wysyłanie wiadomości do urządzeń użytkowników. Przewiduje on istnienie dwóch rodzajów komunikatów. Pierwszym są wiadomości zawierające dowolne dane. Są one niezwykle elastyczne i możliwe do wykorzystania w wielu scenariuszach. Drugi rodzaj stanowią notyfikacje, których odebranie powoduje automatyczne pojawienie się powiadomienia. Jego zawartość oraz inne parametry określane są podczas wysyłania. Dostępne jest dla nich dostosowanie priorytetu, dźwięku powiadomienia, akcji kliknięcia, czy też czasu pojawienia się, co nie musi następować natychmiastowo.
+
+Wszystkie urządzenia posiadają przypisane unikalne tokeny Firebase Cloud Messaging, w skrócie tokeny FCM. Są one wykorzystywane w celu adresowania do nich wiadomości. Inną metodą jest wysyłanie komunikatów w ramach tak zwanych tematów. Wówczas, aby urządzenie je dostawało, to musi odpowiedni temat zasubskrybować. Dostępne jest także zaawansowane określanie urządzeń docelowych na podstawie danych demograficznych i zachowań użytkowników.
+
+% Wiadomości są komunikatami, które mogą zawierać dowolne informacje, a notyfikacje to powiadomienia push, pojawiające się na belce powiadomień. 
+
+% Komunikaty mogą być wysyłane do poszczególnych urządzeń lub do wielu jednocześnie za pomocą tematów, które są przez nie subskrybowane.
+
+% Możliwe jest również zaawansowane określanie urządzeń docelowych na podstawie danych demograficznych i zachowania użytkowników. Są one dostarczane natychmiastowo lub o zaplanowanym czasie. Możliwe jest określenie ich priorytetu, dźwięku powiadomienia i innych parametrów.
+
+% Mogą być one tworzone i wysyłane przy pomocy wygodnego interfejsu graficznego dostępnego w konsoli Firebase. W przypadku potrzeby automatyzacji tego procesu lub wykorzystania zaawansowanych funkcjonalności konieczne jest wysyłanie ich z pomocą środowiska kontrolowanego, którym może być usługa Firebase Functions.
+
+% Istnieje możliwość tworzenia i wysyłania notyfikacji przy pomocy wygodnego interfejsu graficznego dostępnego w konsoli Firebase. W przypadku potrzeby automatyzacji ich wysyłania lub wysłania wiadomości konieczne jest natomiast wykorzystanie środowiska kontrolowanego, którym najczęściej jest Firebase Functions.
+
+\subsection{Firebase Functions}
+\label{technologie-functions}
+
+Firebase Functions to usługa, która umożliwia uruchamianie fragmentów kodu w pełni kontrolowanym środowisku, bez konieczności posiadania i zarządzania własnym serwerem. Jest to istotne, ponieważ urządzenia klienckie nie oferują poziomu bezpieczeństwa i niezawodności, który jest często wymagany.
+
+% Możliwość uruchamiania kodu w kontrolowanym środowisku jest ważna, ponieważ występują ciągi operacji, które wymagają zachowania szczególnej spójności lub bezpieczeństwa. Aplikacje klienckie działające na telefonach użytkowników nie są takim środowiskiem, ponieważ w każdym momencie może zostać utracone połączenie z siecią lub wystąpić inny błąd, który przerwie być może krytyczną operację, doprowadzając tym samym do utraty spójności w systemie. 
+
+Działanie usługi polega na umożliwieniu tworzenia funkcji w języku \mbox{JavaScript} lub \mbox{TypeScript} i zapewnieniu ich uruchomienia jedną z bardzo wielu dostępnych metod. Mogą być wywoływane bezpośrednio przez aplikacje klienckie, przez żądania http lub zostać zaplanowane i wywoływane zgodnie z harmonogramem. Przewidziane zostało również ich uruchamiane w odpowiedzi na zdarzenia występujące wewnątrz Firebase, takie jak rejestracja użytkownika, modyfikacja bazy danych, wysłanie pliku i wiele innych.
+
+Kod źródłowy pisany jest na lokalnych maszynach, skąd następnie może zostać wdrożony w całości przy pomocy pojedynczego polecenia. Wdrożone funkcje są uruchamiane w całkowicie niezależnych od siebie kontenerach, zawierających wszystkie potrzebne elementy. Każda z nich w danym momencie może działać w kilku instancjach, których liczba dopasowuje się automatycznie do bieżącego obciążenia. Takie zachowanie funkcji zapewnia doskonałą skalowalność.
+
+% Inną zaletą kodu backendowego jest to, że jest on całkowicie prywatny i użytkownicy aplikacji nie mają do niego w żaden sposób wglądu, w przeciwieństwie do kodu aplikacji klienckich, który również nie są przewidziany do oglądania przez użytkowników, ale może zostać poddany dekompilacji i procesowi inżynierii wstecznej przez osoby chcące to wykorzystać. 
+
+% Kod backendowy jest również wykorzystywany w miejscach gdzie wymagane jest częste i szybkie wprowadzanie zmian. Zmodyfikowany kod backendowy będzie miał natychmiastowe zastosowanie do wszystkich użytkowników. Zaadaptowanie przez użytkowników nowszej wersji aplikacji klienckiej zajmuje natomiast znacznie więcej czasu.
+
+\subsection{Firebase Security Rules}
+
+Firebase Security Rules to elastyczny oraz kompletny język, który umożliwia definiowanie reguł ograniczających dostęp użytkowników do usług Firebase. Bezpośrednim celem tego działania jest zwiększenie bezpieczeństwa systemu. Podstawowa składnia języka jest zbliżona do JavaScript, lecz szczegóły różnią się w zależności od usługi, do opisywania której jest w danej chwili wykorzystywany. Obecnie wspiera on następujące usługi:
+
+\begin{itemize}
+    \item Cloud Storage
+    \item Firestore
+    \item Realtime Database
+\end{itemize}
+
+% Szczegóły tego języka różnią się dla każdej z wyżej wymienionych usług, lecz jego podstawowa składnia, która jest zbliżona do języka JavaScript, pozostaje podobna. 
+
+Firebase dostarcza wygodne narzędzie wspomagające testowanie reguł nazwane Rules Playground, które jest dostępne za pomocą przeglądarki. Przy jego pomocy możliwe jest symulowanie wykonywania szerokiej gamy operacji w zdefiniowanym kontekście, a w odpowiedzi uzyskanie informacji o tym, która reguła daną operację zaakceptowała lub odrzuciła.
+
+
+% \subsection{Firebase Pub/Sub}
+% Firebase Pub/Sub to usługa zapewniająca globalną magistralę wiadomości, która doskonale się skaluje. Jak nazwa wskazuję umożliwia ona pracę w modelu producent-subskrybent. Producenci komunikują się z subskrybentami poprzez wysyłanie asynchronicznych komunikatów zamiast bezpośredniego wywoływania funkcji. Komunikaty te mogą zawierać dodatkowe informacje na temat jakiegoś zdarzenia, które mogą być wykorzystane przez konsumentów. Są wysyłane poprzez nazwane kanały, zwane tematami. Jednym z możliwych producentów jest Google Scheduler, czyli usługa umożliwiająca wykonywanie akcji, takich jak wysyłanie komunikatów Pub/Sub o zaplanowanym czasie, w tym w sposób periodyczny. Aby zaplanować więc wykonanie jakiegoś zadania należy takie wiadomości zasubskrybować i w odpowiedzi na nie wykonać odpowiednią akcję.
+
+\subsection{Firebase Emulators Suite}
+Firebase Emulators Suite to zestaw  narzędzi dla twórców oprogramowania umożliwiający uruchomienie emulatorów usług Firebase na lokalnej maszynie, które działają identycznie jak ich wersje produkcyjne. Zestaw ten składa się z siedmiu emulatorów składowych, umożliwiających emulację następujących usług:
+
+\begin{multicols}{2}
+    \begin{itemize}
+        \item Auth
+        \item Firestore
+        \item Cloud Storage
+        \item Functions
+        \item Realtime Databse
+        \item Hosting
+        \item Pub/Sub
+    \end{itemize}
+\end{multicols}
+
+Po odpowiednim skonfigurowaniu możliwa jest komunikacja aplikacji z wymienionymi wyżej emulatorami, działającymi na lokalnej maszynie, zamiast środowisku produkcyjnym. Jeżeli część z nich nie zostanie skonfigurowana lub wykorzystywane są usługi, których emulacja nie jest zapewniona, to aplikacja nadal będzie komunikowała się z ich wersjami produkcyjnymi.
+
+Firebase Emulators Suite, poza standardową emulacją, oferuje również dodatkowe funkcjonalności. Pierwszą z nich jest możliwość zapisywania oraz przywracania wcześniej zapisanego stanu poprzez funkcje eksportu i importu. Jest to szczególnie przydatne w kontekście reprodukcji błędów oraz pracy przy trudno odtwarzalnych stanach. Kolejną funkcjonalnością jest szybkie reagowanie na wprowadzane zmiany. Wdrożenie ich do środowiska produkcyjnego zajmuje bowiem do kilku minut. Firebase Emulators Suite jest w stanie natomiast automatycznie wykryć zmiany i natychmiastowo je zaaplikować. Umożliwia to szybkie prototypowanie i testowanie.
+
+
+% \subsection{FirebaseUI}
+% Przedstawienie narzędzia i jak zostało wykorzystane.
+
+%Google maps
+\section{Platforma Google Maps}
+Platforma Google Maps to zestaw interfejsów API (ang. Application Programming Interface) oraz bibliotek SDK (ang. Software Development Kit) umożliwiających deweloperom umieszczanie w aplikacjach map oraz pobieranie różnych informacji z nimi związanych. Wykorzystanie tego typu narzędzia było konieczne, ponieważ zarówno zlecenia, jak i wykonawcy są powiązani z lokalizacjami, które należy przetwarzać i w jakiś sposób wizualizować. 
+
+Poza rozwiązaniem oferowanym przez Google rozważane były również inne możliwości, takie jak MapBox. Istotne w kontekście projektu różnice pomiędzy nimi okazały się jednak na tyle niewielkie, że wybrano Google, ze względu na wykorzystywaną już platformę Google Firebase i chęć uniknięcia komplikacji projektu poprzez włączanie do niego kolejnych dostawców usług.
+
+Na Platformę Google Maps składają się trzy produkty: Maps, Routes oraz Places. Dwa z nich zostały wykorzystane przy realizacji rozważanego tematu i dokładniej opisane poniżej. 
+
+%W celu uzyskania bardziej szczegółowych informacji należy odwołać się do dokumentacji Google Maps Platform \cite{maps-docs}.
+
+\subsection{Maps}
+Jest to produkt, który umożliwia umieszczanie w aplikacjach mobilnych i webowych dynamicznych oraz statycznych map, a także dostosowywanie ich w szerokim zakresie. W jego ramach dostępna jest funkcja Street View, dająca możliwość zobaczenia wybranych części świata z poziomu ulicy oraz interfejs pozwalający na pobieranie danych związanych z wysokością. Został wykorzystany w projekcie ze względu na łatwe osadzenia map wewnątrz aplikacji mobilnych, co można osiągnąć przy pomocy gotowych bibliotek.
+
+\subsection{Places}
+Jest to część platformy Google Maps, która daje dostęp do wielu informacji dotyczących miejsc, takich jak godziny otwarcia, oceny odwiedzających czy zdjęcia. Agreguje interfejsy umożliwiające wyszukiwanie miejsc, autouzupełnianie ich nazw podczas pisania, czy określanie stref czasowych. Zapewnia też geolokalizację, czyli funkcjonalność określania przybliżonego położenia urządzenia na podstawie pobliskich stacji bazowych i sieci Wi-Fi. Istotną funkcjonalnością, o której należy wspomnieć, jest również geokodowanie, czyli możliwość konwersji adresów na współrzędne geograficzne i odwrotnie. Geokodowanie oraz autouzupełnianie nazw lokalizacji to funkcjonalności, które przy realizacji rozważanego tematu okazały się przydatne.
+
+%Języki
+\section{Języki programowania}
+
+Język programowania to podstawowe narzędzie wykorzystywane do rozwoju aplikacji. Wybór języka lub ich zestawu rzutuje na szereg innych elementów. Należało więc dokonać go bardzo rozważnie, biorąc pod uwagę wiele aspektów. Podstawowe z nich to funkcjonalności oferowane przez dany język, zapewnione wsparcie, ilość dostępnych bibliotek czy też popularność, za którą stoi wielkość społeczności, która w razie wystąpienia problemów może pomóc. Rozważań dokonano w kontekście projektu, gdyż każdy ma swoje własne wymagania.
+
+\subsection{Kotlin}
+Do rozwoju aplikacji mobilnych dla systemu Android wybrany został język Kotlin. Jest to statycznie typowany język działający na maszynie wirtualnej Javy, rozwijany głównie przez firmę JetBrains. W 2017 roku na konferencji Google I/O został ogłoszony oficjalnym językiem programowania dla platformy Android. Z tego powodu wsparcie dla niego w przyszłości będzie zapewne coraz bardziej rosnąć, na rzecz wcześniej wykorzystywanej Javy. Minusem jest to, że jest on od niej znacznie młodszy, więc trzeba się liczyć z mniejszą społecznością i liczbą materiałów. 
+
+Język Kotlin jest w pełni interoperacyjny z Javą, co oznacza, że można w nim swobodnie korzystać z bibliotek języka Java, a wnosi dodatkowo wiele udogodnień. Jednym z nich jest wprowadzenie \enquote{null safety}, czyli braku możliwości przypisania do zmiennej typu referencyjnego wartości null, jeżeli w jawny sposób nie wyrażono na to zgody. Eliminuje to w dużym stopniu niebezpieczeństwo związane z tego typu wskaźnikami. Wprowadza również funkcje rozszerzeń, które umożliwiają dodawanie nowych funkcjonalności do już gotowych komponentów, korutyny, które znacznie upraszczają programowanie współbieżne i wiele więcej.
+
+\subsection{TypeScript}
+TypeScript to silnie typowany język bazujący na JavaScript i transpilowany do niego, który został wybrany do tworzenia kodu funkcji w ramach Firebase Functions. Został stworzony przez Microsoft w 2012 roku. Jedyną alternatywę dla niego stanowi czysty JavaScript, ponieważ usługa Firebase Functions nie wspiera innych języków. Bezpośrednim powodem wybrania właśnie TypeScript, jest to, że jest do tego zastosowania zalecany przez Google.
+
+Główną cechą wyróżniającą TypeScript na tle JavaScript jest statyczne typowanie. Poza nim wprowadza moduły oraz przestrzenie nazw, jako skuteczny sposób modularyzacji kodu. Dodaje interfejsy oraz typy wyliczeniowe. Zmiany te powodują, że zdecydowana większa ilość błędów może zostać wykryta już na etapie kompilacji. Jeżeli natomiast chodzi o wady, to należy zauważyć, że TypeScript, dodając etap transpilacji, wprowadza dodatkowy narzut czasowy, nieistniejący dla jedynie interpretowanego języka JavaScript.
+
+Porównując popularność obu języków można się oprzeć na ankiecie przeprowadzonej wśród deweloperów przez Stack Overflow w 2021 roku \cite{stackoverflow-ankieta}. Wynika z niej, że JavaScript jest zdecydowanie najpopularniejszą technologią, wykorzystywaną przez 64.96\% ankietowanych, a korzystanie z TypeScript zadeklarowało jedynie 30.19\%. Większa społeczność jest zaletą języka JavaScript, a wynika ona z długiej historii tego języka i wielu projektów w nim rozpoczętych. Z tej samej ankiety wynika jednak, że TypeScript jest bardziej uwielbianym językiem i w rankingu technologi, których deweloperzy chcieliby używać, plasuję się przed JavaScriptem.
+
+% Środowiska
+\section{Środowisko programistyczne}
+Wybór odpowiedniego środowiska stanowi istotny punkt procesu rozwoju oprogramowania. Nowoczesne narzędzia znacznie go usprawniają poprzez automatyczne uzupełnianie kodu, czy też sugerowanie błędów już podczas jego pisania. Pozwala to zaoszczędzić wiele czasu i wysiłku. Środowisko powinno być jednak jak najbardziej dopasowane do potrzeb projektu, by zapewnić wsparcie, którego on potrzebuje. Z tego powodu zostało to dokładnie przemyślane.
+
+\subsection{Android Studio}
+Android studio jest to IDE (ang. Integrated Development Environment), które zostało wybrane do rozwoju aplikacji mobilnych. Jest oficjalnym środowiskiem programistycznym dla platformy Android i w związku z tym oferuje szeroki wachlarz funkcjonalności. Umożliwia tworzenie aplikacji w języku Kotlin, Java oraz C++, a inteligentny edytor kodu zapewnia trafne podpowiedzi. Odznacza się obecnością wizualnego edytora układów, który pozwala na tworzenie nawet skomplikowanych interfejsów użytkownika przy pomocy metod \mbox{WYSIWYG} (ang. What You See Is What You Get). Ponadto posiada emulator, który daje możliwość testowanie aplikacji na urządzeniach o różnych rozmiarach i wersjach oprogramowania oraz narzędzia służące do profilowania w czasie rzeczywistym, uwzględniające wykorzystanie pamięci, procesora i ruch sieciowy. Dużą zaletą jest również zaawansowany system budowania: Gradle. Pozwala on tworzyć kilka wersji jednej aplikacji, a w wyniku budowania przygotowuje gotowy plik o rozszerzeniu apk, będący gotowym do dostarczenia użytkownikom.
+
+% Do celów konfiguracji wykorzystuje on język domenowy, którym może być Groovy lub Kotlin. Daje możliwość tworzenia kilku wersji aplikacji przy pomocy wariantów budowania (ang. build variants) oraz smaków produktów (ang. product flavors). Rezultatem budowania jest plik o rozszerzeniu apk, będący gotowym do dostarczenia użytkownikom.
+
+
+\subsection{Visual Studio Code}
+Visual Studio Code to edytor kodu źródłowego stworzony przez Microsoft. Zgodnie z badaniem przeprowadzonym w 2021 roku przez Stack Overflow \cite{stackoverflow-ankieta} było to wówczas najczęściej wykorzystywane przez deweloperów środowisko. Zostało wybrane do rozwoju projektu Firebase ze względu na swoją prostotę i możliwość rozbudowy. Dostępnych jest bowiem dla niego wiele rozszerzeń, pozwalających dostosować funkcjonalności do potrzeb. Wśród tych wykorzystanych można wymienić rozszerzenie wspierające tworzenie reguł Firebase Security Rules poprzez kolorowanie składni i podpowiedzi, czy też zapewniające wsparcie dla języka TypeScript. Środowisko posiada debugger i umożliwia wygodną pracę z system kontroli wersji GIT.

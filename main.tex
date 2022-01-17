@@ -1,0 +1,60 @@
+\documentclass[12pt, twoside]{report}
+
+% Preambuła
+\input{preamble}
+
+\begin{document}
+
+% Strona tytułowa
+\includepdf[pages=-]{title_page.pdf}
+
+% Numeruj od strony drugiej
+\clearpage
+\setcounter{page}{1}
+
+% Abstrakt
+\include{chapters/streszczenie}
+
+% Spis treści
+\newpage
+\section*{Spis treści} \
+\vspace{2mm}
+\tableofcontents\thispagestyle{fancy}
+\clearpage
+
+% Główna treść
+\include{chapters/wstep}
+\include{chapters/technologie}
+\include{chapters/architektura}
+\include{chapters/baza}
+\include{chapters/aplikacje}
+\include{chapters/firebase}
+\input{chapters/funkcje}
+\include{chapters/podsumowanie}
+
+% Bibliografia
+\printbibliography[heading=bibintoc]
+
+% Usunięcie odstępów w wykazie rysunków
+\let\origaddvspace\addvspace
+\renewcommand{\addvspace}[1]{}
+
+% Wykaz rysunków
+\setstretch{1.400}
+\newcommand{\loftitle}{Wykaz rysunków}
+\clearpage
+\chapter*{\loftitle}
+\addcontentsline{toc}{chapter}{\loftitle}
+\vspace{3mm}
+\listoffigures
+\setstretch{1.5}
+
+% Wykaz listingów
+\newcommand{\loltitle}{Wykaz listingów}
+\clearpage
+\chapter*{\loltitle}
+\addcontentsline{toc}{chapter}{\loltitle}
+\vspace{3mm}
+\lstlistoflistings
+
+\end{document}

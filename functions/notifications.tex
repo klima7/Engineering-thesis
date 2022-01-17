@@ -1,0 +1,25 @@
+\section{Powiadomienia push}
+
+Powiadomienia w systemie Android są wiadomościami wyświetlanymi poza interfejsem aplikacji, które mogą stanowić przypomnienia, komunikaty lub zachęty do wykonania pewnych czynności. Powiadomienia push są szczególnym ich rodzajem, który jest wywoływany i przesyłany przez zewnętrzny serwer. 
+
+W stworzonym rozwiązaniu powiadomienia push zostały wykorzystane w celu informowania użytkowników o ważnych zdarzeniach, gdy nie korzystają oni akurat z aplikacji. Za ich pomocą są powiadamiani o wysłaniu wiadomości na chacie, zmianie statusu oferty, czy też dodaniu oceny. Przykładowe powiadomienie zostało przedstawione na rysunku \ref{fig:notification}.
+
+% Ich kliknięcie powoduje uruchomienie ekranu aplikacji związanego z danym zdarzeniem.
+
+\begin{figure}[ht!]
+  \centering
+    \fbox{\includegraphics[width=0.66\linewidth]{screens/notification.png}}
+  \caption[Przykład powiadomienia]{Przykład powiadomienia o dodanej ocenie}
+  \label{fig:notification}
+\end{figure}
+
+Powiadomienia są wykorzystywane przez wiele aplikacji, co może prowadzić do natłoku informacji oraz rozdrażnienia użytkowników. Zwrócił na to uwagę Tilo Westermann w swojej książce \enquote{User Acceptance of Mobile Notifications} \cite{notifications-acceptance}. Z jego badań wynika, że powiadomienia związane z prawdziwymi ludźmi są najmniej drażniące. Te wykorzystywane przez tworzone aplikacje można do takich zaliczyć, ponieważ są wywoływane działaniami podejmowanymi przez użytkowników. W książce zostało również stwierdzone, że aplikacje do komunikacji mogą wysyłać powiadomienia w czasie rzeczywistym, podczas gdy dla innych rodzajów warto zastanowić się nad wprowadzeniem opóźnienia, by nie przeszkadzać niepotrzebnie użytkownikom. Tworzone programy uznano za taki rodzaj aplikacji i postanowiono dostarczać powiadomienia jak najszybciej, by użytkownik był na bieżąco.
+
+W celu stworzenia wygodnego systemu powiadomień należy wziąć pod uwagę sposób, w jaki użytkownicy je obsługują. Kwestia ta została poruszona w pewnym artykule \cite{notifications-dismissed}, w którym dokonano rozważań z zachowaniem podziału na kilka kategorii powiadomień. Okazuje się, że te wysyłane przez komunikatory są zwykle bardzo szybko obsługiwane. Z tego powodu ważne było zapewnienie możliwość wygodnego przejścia do ekranu chatu poprzez kliknięcie takiego powiadomienia.
+% Brak przecinka przed poprzez
+
+Implementację znacznie ułatwiła usługa Firebase Cloud Messaging. Z jej pomocą powiadomienia są wysyłane do odpowiednich urządzeń, identyfikowanych przy pomocy tokenów. Gdy użytkownik loguje się na nowym urządzeniu, to do bazy danych przesyłany jest token je identyfikujący, a gdy się wylogowuje, to jest on usuwany. Mechanizm ten w pewnych, szczególnych przypadkach zawodzi. Przykładem jest odinstalowanie lub wyczyszczenie danych aplikacji przez użytkownika. Wówczas jawne wylogowanie nie nastąpi, więc token pozostanie w bazie. Z tego powodu został zaimplementowany sugerowany przez dokumentację Firebase \cite{firebase-docs} mechanizm. Polega on na przechowywaniu razem z tokenami znaczników czasowych i na co dwumiesięcznym usuwaniu tych nieświeżych. Aplikacje klienckie za to raz na miesiąc wymuszają odświeżenie swojego tokena. W ten sposób, jeśli token zostanie usunięty, to znaczy, że nie istniała żadna aplikacja, która go wykorzystywała. 
+
+Periodyczne odświeżanie tokenów przez aplikacje wymagało szczególnej ostrożności, ponieważ mogą zdarzyć się przypadki, że w chwili zaplanowanego odświeżenia urządzenie będzie wyłączone lub offline. W celu obsługi takich scenariuszy wykorzystana została biblioteka WorkManager. Umożliwia ona określenie wymagań zadania, takich jak dostęp do sieci i gwarantuje wykonanie go, gdy zostaną one spełnione.
+
+Użytkownicy mogą zainstalować aplikację na kilku swoich urządzeniach, na przykład telefonie i tablecie. Nie w pełni zaimplementowany system powiadomień może w takiej sytuacji prowadzić do dezorientacji użytkowników. Odczytanie bowiem powiadomienia na jednym z nich nie doprowadzi do samoistnego zniknięcia go na pozostałych. W stworzonym rozwiązaniu postanowiono taką funkcjonalność uwzględnić. Odczytanie powiadomienia wywołuje wysłanie do wszystkich urządzeń użytkownika wiadomości, która mówi, aby odczytane już powiadomienie anulować.

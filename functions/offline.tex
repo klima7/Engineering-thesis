@@ -1,0 +1,11 @@
+\section{Praca offline}
+
+Urządzenia mobilne, ze swojej natury, nie posiadają stabilnego połączenia z siecią. Z tego powodu tworzone aplikacje postanowiono wyposażyć w funkcjonalność pracy offline. Nie tworzono jej jednak z myślą o długotrwałym działaniu, lecz sporadycznych przypadkach. Postanowiono skupić się przy tym na możliwości odczytu informacji, natomiast brak możliwość ich modyfikacji uznano za akceptowalny przez użytkowników.
+
+Duże ułatwienie stanowi wsparcie pracy offline przez bazę danych Firebase Firestore, która została wykorzystana przy większości operacji odczytu. Utrzymuje ona w pamięci cache swój lokalny obraz, by móc z niego korzystać, gdy połączenie z serwerem okaże się niemożliwe. Maksymalny rozmiar przetrzymywanych w tej pamięci informacji ustalono na 200 MB. Aby go utrzymywać najrzadziej wykorzystywane dane są usuwane. Oznacza to, że pracując bez połączenia z siecią należy się liczyć z brakiem kompletności dostępnych informacji. Baza umożliwia również przeprowadzanie modyfikacji danych, które ulegną synchronizacji w momencie przywrócenia połączenia. Zostało to wykorzystane w funkcji wysyłania wiadomości tekstowych na chacie.
+
+% Można go ustalić na wartość dowolną, lecz wraz doskonaleniem tym sposobem pracy offline rośnie również sam rozmiar aplikacji, co nie jest korzystne z punktu widzenia użytkowników. Określając więc optymalny rozmiar pamięci cache należy znaleźć kompromis pomiędzy tymi aspektami, który mógłby być przedmiotem dalszych badań.
+
+Magazyn plików Firebase Storage nie posiada żadnych mechanizmów ułatwiających pracę offline. W celu zapewnienia ciągłego dostępu do przechowywanych zdjęć, a przynajmniej ich części, wykorzystana została biblioteka Glide. Dostarcza ona wygodny oraz elastyczny mechanizm cachowania dla obrazów.
+
+Duże trudności w zapewnieniu odpowiedniego działania pojawiły się tam, gdzie wykorzystane zostały funkcje Firebase Functions w celach odczytu informacji. Aby zapewnić pracę bez połączenia z siecią w tych przypadkach należało zaimplementować własny, zamknięty wewnątrz klasy odpowiedniego repozytorium, mechanizm cachowania.

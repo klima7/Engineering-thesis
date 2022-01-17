@@ -1,0 +1,234 @@
+% ====================== Pakiety =========================
+
+% Support for UTF - relevant only for engines not supporting UTF
+% \usepackage[utf8]{inputenc}
+
+% Polski
+\usepackage[polish]{babel}
+\usepackage[T1]{fontenc}
+
+% Marginesy
+\usepackage[a4paper, top=2.5cm, bottom=3cm, inner=3cm, outer=2.5cm]{geometry}
+
+% Stylizacja spisu treści
+\usepackage{tocloft}
+
+% Czcionki
+\usepackage{fontspec}
+
+% Nagłówki i stopki
+\usepackage{fancyhdr}
+
+% Odstępy między liniami
+\usepackage{setspace}
+
+% Bibliografia
+\usepackage[backend=biber, sorting=none]{biblatex}
+\usepackage{csquotes}
+
+% Stylizacja nagłówków
+\usepackage{titlesec}% Stylizacja nagłówków spisów
+\usepackage{titletoc}
+
+% Generowanie Lorem Ipsum
+\usepackage{lipsum} 
+
+% Wcinanie pierwszych akapitów
+\usepackage{indentfirst}
+
+% Hiperlinki
+\usepackage[draft=false]{hyperref}
+
+% Unikanie przełamania strony w akapicie
+\usepackage[defaultlines=2,all]{nowidow}
+
+% Zdjęcia
+\usepackage{graphicx}
+\usepackage{subcaption}
+
+% Łączenie pdf-ów
+\usepackage{pdfpages}
+
+% Bloki komentarzy i bezpośredni tekst
+\usepackage{verbatim}
+
+% Stylizacja list
+\usepackage{enumitem}
+
+% Pakiet do wielu kolumn
+\usepackage{multicol}
+
+% Pakiet do oznaczania rzeczy do zrobienia
+% \usepackage[bordercolor=white,backgroundcolor=gray!30,linecolor=black,colorinlistoftodos]{todonotes}
+
+% Pakiet wspierający wiele opcjonalnych parametrów
+\usepackage{xargs}
+
+% Pakiet do umieszczania listingów kodu
+\usepackage{listings}
+
+% Kolory
+\usepackage{color}
+
+% Pakiet dotyczący języka francuskiego, ale usuwa sieroty
+\usepackage[nosingleletter]{impnattypo}
+
+% Poprawa typesettingu
+\usepackage{microtype}
+
+% ================== Konfiguracja =====================
+
+% Ustawienie domyślnych czcionek
+\setmainfont{Times New Roman}
+\setsansfont{Arial}
+
+% Odstęp między liniami
+\setstretch{1.5}
+
+% Głębokość wcięcie akapitów
+\setlength\parindent{0cm}
+
+% Usunięcie odstępu po tytule w spisie treści
+\addtocontents{toc}{\vspace{-5ex}}
+
+% Nagłówek strony
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{\fontsize{14pt}{1.2}\selectfont\textbf{\textit{\thepage}}}
+\lhead{\fontsize{10pt}{12pt}\selectfont Łukasz Klimkiewicz\\ \textit{Wykorzystanie technologii mobilnych oraz Google Firebase na przykładzie portalu ogłoszeniowego}}
+
+% Zapewnienie ilości miejsca na nagłówek
+\setlength{\headheight}{22.5434pt}
+
+% Dodanie nagłówka na każdej stronie
+\fancypagestyle{plain}{}
+
+% Usunięcie domyślnego tytułu spisu treści
+\makeatletter
+\renewcommand{\@cftmaketoctitle}{}
+\makeatother
+
+\makeatletter
+\renewcommand{\@cftmakeloftitle}{}
+\makeatother
+  
+% Zmniejsza automatycznie dodawane spacje między paragrafami
+\setlength{\parskip}{3mm plus 1.0pt minus0mm}
+
+% Usunięcie przerw przed rozdziałami i sekcjami
+% Usunięcie przerw przez rozdziałami
+\titlespacing{\chapter}{0pt}{-30pt}{0mm} % -\parskip
+\titlespacing{\section}{0pt}{5mm}{0mm}
+\titlespacing{\subsection}{0pt}{5mm}{0mm}
+
+% Dodanie poprawnego numerowanie rozdziałów
+\titleformat{\chapter}[hang] 
+{\normalfont\LARGE\bfseries}{\thechapter}{1em}{} 
+
+\titleformat*{\chapter}{\bfseries\LARGE\sffamily}
+\titleformat*{\section}{\bfseries\Large\sffamily}
+\titleformat*{\subsection}{\bfseries\large\sffamily}
+
+% Dodanie bibliografii
+\addbibresource{bibliography.bib}
+
+% Konfiguracja hiperlinków
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+% Ograniczenie głębokości spisu treści
+\setcounter{tocdepth}{1}
+
+% Usunięcie odstępu pomiędzy rozdział w spisie treści
+\makeatletter
+\renewcommand*\l@chapter[2]{%
+  \ifnum \c@tocdepth >\z@
+    \addpenalty\@secpenalty
+    \setlength\@tempdima{1.5em}%
+    \begingroup
+      \parindent \z@ \rightskip \@pnumwidth
+      \parfillskip -\@pnumwidth
+      \leavevmode \bfseries
+      \advance\leftskip\@tempdima
+      \hskip -\leftskip
+      #1\nobreak\hfil \nobreak\hb@xt@\@pnumwidth{\hss #2}\par
+    \endgroup
+  \fi}
+\makeatother
+
+% Usunięcie odstępu między elementami list i górnego odstępu
+\setlist{nolistsep, topsep=0pt}
+
+% Dostosowanie odstępu przed i po kolumnach
+\setlength{\multicolsep}{3pt plus 0pt minus 0pt}
+
+% Dodanie komendy do zakreślania
+\newcommand{\stub}[1]{\todo[color=yellow,inline]{TODO: #1}}
+
+% Komenda unsure
+\newcommandx{\unsure}[2][1=]{\todo[linecolor=red,backgroundcolor=red!25,bordercolor=red,#1]{#2}}
+
+% Odstęp pomiędzy ramką, a zawartością
+\setlength{\fboxsep}{0pt}
+
+% Definicja kolorów
+\definecolor{lightgray}{rgb}{.95,.95,.92}
+\definecolor{purple}{rgb}{1, 0, 1}
+\definecolor{mediumorchid}{rgb}{0.72, 0.33, 0.82}
+\definecolor{darkviolet}{rgb}{0.58, 0, 0.82}
+\definecolor{green}{rgb}{0, 0.5, 0}
+
+% Zdefiniowanie kolorowania dla typescript
+\lstdefinelanguage{TypeScript}{
+  keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break, const, async, =>},
+  keywordstyle=\color{blue}\bfseries,
+  ndkeywords={class, export, boolean, throw, implements, import, this},
+  ndkeywordstyle=\color{mediumorchid}\bfseries,
+  identifierstyle=\color{black},
+  sensitive=false,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  commentstyle=\color{green}\ttfamily,
+  stringstyle=\color{red}\ttfamily,
+  morestring=[b]',
+  morestring=[b]"
+}
+
+% Określenie stylów listingów
+\lstset{
+   language=TypeScript,
+   backgroundcolor=\color{lightgray},
+   extendedchars=true,
+   basicstyle=\footnotesize\ttfamily,
+   showstringspaces=false,
+   showspaces=false,
+   numbers=none,
+   numberstyle=\footnotesize,
+   numbersep=9pt,
+   tabsize=2,
+   breaklines=true,
+   showtabs=false,
+   captionpos=b
+}
+
+% Domyślna długość lorem ipsum
+\SetLipsumDefault{2-6}
+
+% Domyślnie wyśrodkowuj nagłówki zagnieżdżonych rysunków
+\captionsetup[subfigure]{justification=centering}
+
+% Wyłącza przełamywanie słów
+% \tolerance=1
+% \emergencystretch=\maxdimen
+% \hyphenpenalty=10000
+% \hbadness=10000
+
+% ================== własne komendy =====================
+
+\newcommand{\filename}[1]{\texttt{#1}}
+\newcommand{\code}[1]{\texttt{#1}}
