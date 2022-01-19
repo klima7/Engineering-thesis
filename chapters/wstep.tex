@@ -10,9 +10,9 @@ Zważając na dużą popularność aplikacji mobilnych oraz przydatne funkcjonal
 
 \section{Cel oraz zakres pracy}
 
-Celem pracy jest przedstawienie wykorzystania technologii mobilnych oraz Google Firebase na przykładzie rozwiązania umożliwiającego łatwe zamawiania przez klientów i oferowanie przez wykonawców różnego rodzaju usług. 
+Celem pracy było przedstawienie wykorzystania technologii mobilnych oraz Google Firebase na przykładzie rozwiązania umożliwiającego łatwe zamawiania przez klientów i oferowanie przez wykonawców różnego rodzaju usług. 
 
-Z góry został założony podstawowy schemat działania systemu polegający na tym, że utworzone przez klientów zlecenia na wykonanie usług mają być wysyłane do dopasowanych pod nie wykonawców - decydujących, czy chcą się ich podjąć. Jest to o tyle istotne, że jest to model odwrotny w stosunku do powszechnie znanego modelu sprzedaży dóbr materialnych, w którym to sprzedający tworzą oferty, a kupujący decydują, czy je przyjąć. W przypadku usług tę odpowiedzialność - podjęcie decyzji - warto przenieść na stronę wykonawców, ponieważ po zapoznaniu się z ofertą to oni wiedzą najlepiej, czy posiadają odpowiednie umiejętności i narzędzia, i czy mogą wykonać usługę w żądanym terminie. 
+Z góry został założony podstawowy schemat działania systemu polegający na tym, że utworzone przez klientów zlecenia na wykonanie usług miały być wysyłane do dopasowanych pod nie wykonawców - decydujących, czy chcą się ich podjąć. Jest to o tyle istotne, że jest to model odwrotny w stosunku do powszechnie znanego modelu sprzedaży dóbr materialnych, w którym to sprzedający tworzą oferty, a kupujący decydują, czy je przyjąć. W przypadku usług tę odpowiedzialność - podjęcie decyzji - warto przenieść na stronę wykonawców, ponieważ po zapoznaniu się z ofertą to oni wiedzą najlepiej, czy posiadają odpowiednie umiejętności i narzędzia, i czy mogą wykonać usługę w żądanym terminie. 
 
 % W przedstawionym mechanizmie klientom pozostawia się swobodę wyboru, ponieważ, jeżeli do zlecenia zgłosi się kilku wykonawców, to mogą oni wybrać tego, który najbardziej im odpowiada. Mogą też nie wybrać żadnego, jeśli mają takie życzenie. Aby ten mechanizm sprawnie działał w zakres pracy zdecydowano się włączyć system ocen i komentarzy. Dzięki niemu klienci szukający wykonawców do nowo stworzonych zleceń będą mogli bazować swoje decyzje na ocenach i komentarzach dodanych przez innych.
 
@@ -33,8 +33,6 @@ Jednym z kluczowych aspektów jest sposób, w jaki wykonawcy mają być dopasowy
 
 % Lokalizacja
 Przed przystąpieniem do implementacji ważne było poczynienie założenia co do obszaru na którym zakłada się, że będzie ona używana. Ma to oczywisty wpływ na język, ale wewnątrz aplikacji przewidziana została również możliwość wybierania lokalizacji przez użytkowników, która powinna zostać ograniczona do zadanego rejonu. Musi określić ją chociażby klient dla każdego nowo tworzonego zlecenia, aby mogło zostać wysłane do pobliskich wykonawców. Brak jakichkolwiek ograniczeń oznaczałby, że osoby mieszkające w pobliżu granicy mogłyby otrzymywać i zgłaszać się do zleceń osób z sąsiednich krajów, co nie zawsze mogłoby być pożądane, a nawet możliwe. Pojawiają się wówczas również problemy natury komunikacyjnej z powodu prawdopodobnie różnych języków narodowych. Z tych względów stwierdzono, że taka aplikacja powinna być ograniczona do jednego kraju, a konkretnie postanowiono ją przygotować dla Polski.
-
-\pagebreak
 
 % Optymalizacja kosztów
 Ostatnim założeniem było zaimplementowanie wszystkich funkcjonalności, w miarę możliwości, w sposób zoptymalizowany pod względem kosztów. Większość usług wchodzących w skład platformy Firebase jest płatna, a obciążenia kosztami dokonuje się zwykle na podstawie intensywności ich wykorzystania. Zaniedbanie tego aspektu początkowo może nie stanowić problemu, lecz gdy aplikacja zyska popularność, to może ujawnić się brak jej skalowalności, objawiający się generowaniem wysokich kosztów. Z tego powodu należy przyjąć schematy przechowywania danych minimalizujące liczbę operacji, wykorzystać takie mechanizmy jak stronicowanie czy cachowanie, by temu zjawisku przeciwdziałać, a przynajmniej je ograniczać.
