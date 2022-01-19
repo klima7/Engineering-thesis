@@ -36,7 +36,7 @@ Największą część funkcji stanowią te, które są wywoływane bezpośrednio
 
 Alternatywę dla tego typu delegowania zadań do funkcji przez aplikacje mobilne stanowi bezpośrednie ich wykonanie po stronie klienckiej. Nie zawsze można jednak na to pozwolić, ponieważ przerwanie niektórych zadań może zostawić system w stanie niespójnym. Środowisko funkcji jest znacznie bezpieczniejsze i stanowi dobre miejsce na wykonywanie takich operacji. 
 
-Ten rodzaj funkcji musiał również zostać wykorzystany do ustawiania przez aplikacje klienckie danych, z których walidacją nie były w stanie poradzić sobie reguły bezpieczeństwa Firebase Security Rules. W celu weryfikacji niektórych informacji konieczne było bowiem wykonanie żądania do API map, co dla reguł nie jest możliwe, a dla funkcji już tak. 
+Ten rodzaj funkcji został również wykorzystany do ustawiania przez aplikacje klienckie danych, z których walidacją nie były w stanie poradzić sobie reguły bezpieczeństwa Firebase Security Rules. W celu weryfikacji niektórych informacji konieczne było bowiem wykonanie żądania do API map, co dla reguł nie jest możliwe, a dla funkcji już tak. 
 
 Ostatecznie, aby zachować spójność i nie wykonywać części operacji modyfikacji bezpośrednio w bazie, a części za pośrednictwem funkcji, postanowiono dla wszystkich preferować drugą możliwość. Bezpośrednich modyfikacji dokonywano natomiast jedynie wtedy, gdy było to naprawdę uzasadnione.
 

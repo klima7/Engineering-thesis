@@ -3,7 +3,7 @@
 \label{part:applications}
 
 % Brak przecinka przed zamiast
-Oparcie rozwiązania o Firebase pozwoliło znacznie uprościć część backendową, która sprowadza się jedynie do opisanego w kolejnym rozdziale projektu Firebase. Dodało to jednak wiele odpowiedzialności ciążących na stronie klienckiej. Dodatkowo decyzja o stworzeniu dwóch aplikacji mobilnych zamiast jednej przyczynia się do dalszej jej komplikacji. Z wymienionych powodów opracowanie aplikacji mobilnych stanowiło dominującą część całego projektu i zastosowane wewnątrz nich rozwiązania wymagały głębokiego przemyślenia.
+Oparcie rozwiązania o Firebase pozwoliło znacznie uprościć część backendową, która sprowadza się jedynie do opisanego w kolejnym rozdziale projektu Firebase. Dodało to jednak wiele odpowiedzialności ciążących na stronie klienckiej. Ponadto decyzja o stworzeniu dwóch aplikacji mobilnych zamiast jednej przyczynia się do dalszej jej komplikacji. Z wymienionych powodów opracowanie aplikacji mobilnych stanowiło dominującą część całego projektu i zastosowane wewnątrz nich rozwiązania wymagały głębokiego przemyślenia.
 
 % Brak przecinka przed zamiast
 % Oparcie projektu o Firebase pozwala znacznie uprościć lub wręcz usunąć część backendową, lecz dodaje więcej odpowiedzialności ciążących na stronie klienckiej. Należy równocześnie mieć na uwadze wcześniejsze założenie, co do stworzenia dwóch aplikacji mobilnych zamiast jednej. Z wymienionych powodów implementacja części klienckiej stanowi dominującą część całego projektu i dlatego zastosowane wewnątrz niej rozwiązania wymagają głębokiego przemyślenia.
@@ -12,7 +12,7 @@ Oparcie rozwiązania o Firebase pozwoliło znacznie uprościć część backendo
 
 Odpowiednio dobrana architektura umożliwia płynny rozwój aplikacji, nawet, przy bardzo dużej i ciągle rosnącej bazie kodu. Jest to również najważniejszy element wpływający na solidność oraz możliwość testowania.
 
-Jedną z główny cech, jaką dobra architektura powinna się charakteryzować, jest jasne i precyzyjne określenie odpowiedzialności posiadanych przez poszczególne części programu. Sam podział aplikacji na jak najbardziej niezależne sekcje jest sugerowany przez regułę projektowania zwaną skrótowo SoC (ang. Separation of Concerns). Zgodnie z nią każda z nich powinna zajmować się innym problemem, pracować z innymi informacjami.
+Jedną z główny cech, jaką dobra architektura powinna się charakteryzować, jest jasne i precyzyjne określenie odpowiedzialności posiadanych przez poszczególne części programu. Podział aplikacji na jak najbardziej niezależne sekcje jest sugerowany przez regułę projektowania zwaną skrótowo SoC (ang. Separation of Concerns). Zgodnie z nią każda z nich powinna zajmować się innym problemem, pracować z innymi informacjami.
 
 Architekturą, która doskonale spełnia wymienione wymagania, jest trójwarstwowa architektura rekomendowana przez Google dla aplikacji mobilnych. Składają się na nią warstwy prezentacji, domenowa oraz danych, z których każda pełni inne funkcje. Zostały one przedstawione na rysunku \ref{fig:ca-warstwy}.
 
